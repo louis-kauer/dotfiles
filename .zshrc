@@ -7,7 +7,6 @@ eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/capr4n.o
 
 export POSH_CACHE_PATH="$HOME/.cache/oh-my-posh"
 eval $(thefuck --alias)
-alias cat=bat
 
 
 ## K8s Aliases
