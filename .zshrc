@@ -44,6 +44,11 @@ alias glog='git log --oneline --graph --decorate'
 # Short Git Status
 alias gs='git status -s'
 
+# Functions
+gca() {
+    git commit --amend -m "$1"
+}
+
 
 export GPG_TTY=$(tty)
 gpgconf --launch gpg-agent
