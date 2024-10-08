@@ -9,6 +9,15 @@ export POSH_CACHE_PATH="$HOME/.cache/oh-my-posh"
 eval $(thefuck --alias)
 
 
+## CLI Navigation
+
+alias ..="cd .."
+alias cd..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+
 ## K8s Aliases
 
 # Flux Gravelmania
