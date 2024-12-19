@@ -61,4 +61,6 @@ gca() {
 export GPG_TTY=$(tty)
 gpgconf --launch gpg-agent
 
+export TERM=xterm
+
 neofetch
