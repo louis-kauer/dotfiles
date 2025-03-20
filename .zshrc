@@ -24,7 +24,7 @@ alias .....="cd ../../../.."
 alias flux-rec-all='flux reconcile source git flux-system && flux reconcile kustomization flux-system && flux reconcile kustomization apps-gravelmania'
 
 # General K8s Aliases
-alias kctl='kubectl'
+alias k='kubectl'
 alias kuc='kubectl config use-context'
 alias kgc='kubectl config get-contexts'
 
@@ -62,5 +62,19 @@ export GPG_TTY=$(tty)
 gpgconf --launch gpg-agent
 
 export TERM=xterm
+
+eval "$(direnv hook zsh)"
+
+## PATH BIN'S
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH=$PATH:$HOME/GolandProjects/kubectl-config-merge/out
+export PATH="/opt/homebrew/opt/go@1.23/bin:$PATH"
+
+## NVM
+
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 neofetch
