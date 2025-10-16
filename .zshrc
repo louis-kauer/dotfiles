@@ -37,26 +37,17 @@ alias ga='git add'
 alias gc='git commit -m'
 alias gco='git checkout'
 alias gst='git status -sb'
-alias gl='git pull'
-alias gp='git push'
+alias gs='git status'
+alias gpu='git push'
+alias gp='git pull'
 alias gd='git diff'
-alias gpl='git pull'
-alias gcm='git commit -m' # commit with message
 alias gcam='git commit -am' # commit all with message
 alias gb='git branch'
 alias gcl='git clone'
+alias gf='git fetch'
 
 # Log-related Git Aliases
 alias glog='git log --oneline --graph --decorate'
-
-# Short Git Status
-alias gs='git status -s'
-
-# Functions
-gca() {
-    git commit --amend -m "$1"
-}
-
 
 export GPG_TTY=$(tty)
 gpgconf --launch gpg-agent
@@ -78,3 +69,4 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 neofetch
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
