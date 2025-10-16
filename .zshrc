@@ -3,7 +3,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/capr4n.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/zsh/capr4n.omp.json)"
 
 export POSH_CACHE_PATH="$HOME/.cache/oh-my-posh"
 eval $(thefuck --alias)
