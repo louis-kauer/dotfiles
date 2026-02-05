@@ -2,41 +2,16 @@
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "blocks": [
     {
-      "alignment": "right",
-      "segments": [
-        {
-          "background": "#003543",
-          "foreground": "#ffffff",
-          "style": "plain",
-          "template": " \ue641 {{ .CurrentDate | date .Format }} ",
-          "type": "time"
-        },
-        {
-          "background": "#83769c",
-          "foreground": "#ffffff",
-          "properties": {
-            "always_enabled": true
-          },
-          "style": "plain",
-          "template": " \ueba2 {{ .FormattedMs }} ",
-          "type": "executiontime"
-        }
-      ],
-      "type": "rprompt"
-    },
-    {
       "alignment": "left",
+      "newline": true,
       "segments": [
         {
-          "background": "#ffffff",
-          "foreground": "#000000",
-          "properties": {
-            "display_host": false
-          },
+          "background": "#326ce5",
+          "foreground": "#ffffff",
           "style": "diamond",
-          "template": "{{if .Root}} \uf0e7 {{.UserName}} {{else}} {{.UserName}} {{end}}",
+          "template": " ☸ {{ .Context }} ",
           "trailing_diamond": "\ue0b0",
-          "type": "session"
+          "type": "kubectl"
         },
         {
           "background": "#ffffff",

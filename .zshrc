@@ -1,43 +1,75 @@
-# zsh-syntax-highlighting: https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# =============================================================================
+# ZSHRC
+# =============================================================================
 
+## Environment Variables
+export TERM=xterm
+export GPG_TTY=$(tty)
+export POSH_CACHE_PATH="$HOME/.cache/oh-my-posh"
+export PYENV_ROOT="$HOME/.pyenv"
+export NVM_DIR="$HOME/.nvm"
+
+## PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$HOME/GolandProjects/kubectl-config-merge/out:$PATH"
+export PATH="/opt/homebrew/opt/go@1.23/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+if command -v go &> /dev/null; then
+    export PATH="$(go env GOPATH)/bin:$PATH"
+fi
+
+## Tools
+
+### Python (pyenv)
+if command -v pyenv &> /dev/null; then
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+fi
+
+### Node (nvm)
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+### direnv
+if command -v direnv &> /dev/null; then
+    eval "$(direnv hook zsh)"
+fi
+
+### thefuck
+if command -v thefuck &> /dev/null; then
+    eval "$(thefuck --alias)"
+fi
+
+### GPG
+gpgconf --launch gpg-agent 2>/dev/null
+
+### Oh My Posh
 eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/zsh/capr4n.omp.json)"
 
-export POSH_CACHE_PATH="$HOME/.cache/oh-my-posh"
-eval $(thefuck --alias)
+## Aliases
 
-## Python 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-
-## CLI Navigation
-
+### Navigation
 alias ..="cd .."
 alias cd..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-
-## K8s Aliases
-
-# Flux Gravelmania
-alias flux-rec-all='flux reconcile source git flux-system && flux reconcile kustomization flux-system && flux reconcile kustomization apps-gravelmania'
-
-# General K8s Aliases
+### Kubernetes
 alias k='kubectl'
 alias kuc='kubectl config use-context'
 alias kgc='kubectl config get-contexts'
+alias kns='kubectl config set-context --current --namespace'
 
+### Flux
+alias flux-rec='flux reconcile source git flux-system -n flux-system && flux reconcile kustomization --all -n flux-system'
+alias flux-rec-all='flux reconcile source git flux-system && flux reconcile kustomization flux-system && flux reconcile kustomization apps-gravelmania'
 
-## Git Aliases
+### Git
 alias g='git'
-
-# Essential Git Aliases
 alias ga='git add'
 alias gc='git commit -m'
 alias gco='git checkout'
@@ -46,32 +78,16 @@ alias gs='git status'
 alias gpu='git push'
 alias gp='git pull'
 alias gd='git diff'
-alias gcam='git commit -am' # commit all with message
+alias gcam='git commit -am'
 alias gb='git branch'
 alias gcl='git clone'
 alias gf='git fetch'
-
-# Log-related Git Aliases
 alias glog='git log --oneline --graph --decorate'
 
-export GPG_TTY=$(tty)
-gpgconf --launch gpg-agent
+## ZSH Plugins
 
-export TERM=xterm
+### Autosuggestions
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-eval "$(direnv hook zsh)"
-
-## PATH BIN'S
-
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export PATH=$PATH:$HOME/GolandProjects/kubectl-config-merge/out
-export PATH="/opt/homebrew/opt/go@1.23/bin:$PATH"
-
-## NVM
-
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-neofetch
-export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+### Syntax Highlighting (must be last)
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
