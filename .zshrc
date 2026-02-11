@@ -58,7 +58,12 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+### PWD
+
+alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
+
 ### Kubernetes
+
 alias k='kubectl'
 alias kuc='kubectl config use-context'
 alias kgc='kubectl config get-contexts'
