@@ -39,7 +39,7 @@
       "type": "prompt"
     }
   ],
-  "console_title_template": "{{if .Root}} \u26a1 {{end}}{{.UserName}} \u2794 📁{{.Folder}}",
+  "console_title_template": "CPU {{ .System.CPU.Percentage | printf \"%0.0f\" }}% | RAM {{ .System.Memory.Percentage | printf \"%0.0f\" }}%",
   "final_space": true,
   "version": 3
 }

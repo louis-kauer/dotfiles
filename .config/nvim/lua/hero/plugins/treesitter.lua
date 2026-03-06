@@ -5,20 +5,15 @@ return {
     dependencies = {
         "windwp/nvim-ts-autotag",
         {
-            "nvim-treesitter/nvim-treesitter-context", -- Show code context
+            "nvim-treesitter/nvim-treesitter-context",
             opts = { enable = true, mode = "topline", line_numbers = true },
         },
     },
     config = function()
-        local treesitter = require("nvim-treesitter.configs")
-
-        vim.api.nvim_create_autocmd("FileType", {
-            pattern = { "markdown" },
-            callback = function(ev)
-                -- Tree-sitter-context is buggy with Markdown files
-                require("treesitter-context").disable()
-            end,
-        })
+        local status, treesitter = pcall(require, "nvim-treesitter.configs")
+        if not status then
+            return
+        end
 
         treesitter.setup({
             ensure_installed = {
@@ -47,12 +42,23 @@ return {
             sync_install = false,
             highlight = {
                 enable = true,
-                disable = { "csv" }, -- preferring chrisbra/csv.vim
+                disable = { "csv" },
             },
             autotag = {
                 enable = true,
             },
             textobjects = { select = { enable = true, lookahead = true } },
+        })
+
+        -- Custom Markdown behavior
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = { "markdown" },
+            callback = function()
+                local ok, context = pcall(require, "treesitter-context")
+                if ok then
+                    context.disable()
+                end
+            end,
         })
     end,
 }
