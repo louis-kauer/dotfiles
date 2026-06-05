@@ -69,6 +69,29 @@ alias kuc='kubectl config use-context'
 alias kgc='kubectl config get-contexts'
 alias kns='kubectl config set-context --current --namespace'
 
+# Fuzzy search and switch Kubernetes context using fzf
+ksc() {
+    local current_context selected_context
+    current_context=$(kubectl config current-context 2>/dev/null)
+
+    selected_context=$(
+        kubectl config get-contexts -o name | fzf \
+            --prompt="Switch K8s Context > " \
+            --height=50% \
+            --reverse \
+            --border=rounded \
+            --color=fg:white,bg:235,hl:177,fg+:white,pointer:177,marker:177,prompt:111,spinner:111,header:111 \
+            --header="Select Context (Current: ${current_context:-none})"
+    )
+
+    if [[ -n "$selected_context" ]]; then
+        echo "Switching to $selected_context..."
+        kubectl config use-context "$selected_context"
+    else
+        echo "Context switch cancelled."
+    fi
+}
+
 ### Talos
 alias t='talosctl'
 alias tgc='talosctl config contexts'
