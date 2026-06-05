@@ -126,3 +126,6 @@ source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 ### Syntax Highlighting (must be last)
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+## Local overrides (not tracked in repo)
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
