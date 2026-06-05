@@ -69,6 +69,13 @@ alias kuc='kubectl config use-context'
 alias kgc='kubectl config get-contexts'
 alias kns='kubectl config set-context --current --namespace'
 
+### Talos
+alias t='talosctl'
+alias tgc='talosctl config contexts'
+alias tuc='talosctl config context'
+alias tn='talosctl config node'
+alias tci='talosctl config info'
+
 ### Flux
 alias flux-rec='flux reconcile source git flux-system -n flux-system && flux reconcile kustomization --all -n flux-system'
 alias flux-rec-all='flux reconcile source git flux-system && flux reconcile kustomization flux-system && flux reconcile kustomization apps-gravelmania'
