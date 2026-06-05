@@ -12,7 +12,7 @@ export NVM_DIR="$HOME/.nvm"
 ## PATH
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$HOME/GolandProjects/kubectl-config-merge/out:$PATH"
-export PATH="/opt/homebrew/opt/go@1.23/bin:$PATH"
+export PATH="/opt/homebrew/opt/go@1.26/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
