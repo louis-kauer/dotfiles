@@ -92,6 +92,9 @@ ksc() {
     fi
 }
 
+### vcluster
+alias vc='vcluster --driver helm'
+
 ### Talos
 alias t='talosctl'
 alias tgc='talosctl config contexts'
